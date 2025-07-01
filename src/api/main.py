@@ -1,29 +1,3 @@
-'''"""
-Application entry point for the MITRE Deception Project API.
-"""
-
-import os
-
-import uvicorn
-
-# Import the FastAPI app
-from src.api.app import app
-
-# Run the application if this script is executed directly
-if __name__ == "__main__":
-    # Get configuration from environment
-    host = os.environ.get("HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", "8000"))
-    reload = os.environ.get("RELOAD", "false").lower() == "true"
-    workers = int(os.environ.get("WORKERS", "1"))
-
-    # Run with uvicorn
-    uvicorn.run("src.api.app:app", host=host, port=port, reload=reload, workers=workers)
-'''
-
-
-# src/main.py - Main application entry point
-
 import logging
 import os
 

@@ -19,12 +19,6 @@ scrape_configs:
     static_configs:
       - targets: ['app:8001']
 
-  # Neo4j metrics
-  - job_name: 'neo4j'
-    metrics_path: /metrics
-    static_configs:
-      - targets: ['localhost:2004']
-
   # PostgreSQL metrics
   - job_name: 'postgres'
     static_configs:

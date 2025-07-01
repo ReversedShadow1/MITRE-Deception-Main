@@ -6,7 +6,6 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
-      - "2004:2004"
     environment:
       - NEO4J_AUTH=neo4j/password
       - NEO4J_dbms_default__database=pipe
@@ -15,10 +14,6 @@ services:
       - NEO4J_PLUGINS=["graph-data-science", "apoc"]
       - NEO4J_dbms_security_procedures_whitelist=gds.*, apoc.*
       - NEO4J_dbms_security_procedures_unrestricted=gds.*, apoc.*
-      - NEO4J_server_config_strict__validation_enabled=false
-      - NEO4J_server_metrics_enabled=true
-      - NEO4J_server_metrics_prometheus_enabled=true
-      - NEO4J_server_metrics_prometheus_endpoint=0.0.0.0:2004
       
     volumes:
       - neo4j-data:/data
@@ -118,7 +113,6 @@ services:
     depends_on:
       - prometheus
 
-  # Removed RabbitMQ since it's causing issues and not used in the codebase
   
   app:
     build: .
@@ -138,7 +132,7 @@ services:
       - AUTO_DOWNLOAD_MODELS=false  # Set to false for faster startup
       - INITIALIZE_DATABASE=false
       - INITIALIZE_POSTGRES=true
-      - INITIALIZE_TEST_USER=true  # New environment variable for creating test user
+      - INITIALIZE_TEST_USER=true  # environment variable for creating test user
       - TEST_USER_UUID=00000000-0000-0000-0000-000000000000  # Fixed UUID for test user
       - INITIALIZE_NEO4J=false
       - ENVIRONMENT=development

@@ -237,7 +237,6 @@ class DetailedExtractionResponse(BaseModel):
     meta: Dict[str, Any]
 
 
-# Add this new endpoint to the router
 @router.post("/extract/detailed", response_model=DetailedExtractionResponse)
 @tiered_limit(
     basic_limit="20/minute", premium_limit="60/minute", enterprise_limit="120/minute"

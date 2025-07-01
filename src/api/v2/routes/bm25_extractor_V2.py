@@ -393,36 +393,6 @@ class EnhancedBM25Extractor:
         except Exception as e:
             logger.error(f"Failed to cache BM25 model: {str(e)}")
 
-    '''def extract_techniques(
-        self, 
-        text: str, 
-        threshold: float = 0.1, 
-        top_k: int = 10
-    ) -> List[Dict]:
-        """
-        Extract techniques using enhanced BM25 ranking
-        
-        Args:
-            text: Input text to analyze
-            threshold: Minimum score threshold (0-1)
-            top_k: Maximum number of results
-            
-        Returns:
-            List of technique matches with scores
-        """
-        if not self.bm25_model:
-            logger.error("BM25 model not initialized")
-            return []
-            
-        # Process differently depending on whether vectorizer is used
-        if self.use_field_weighting and self.vectorizer:
-            results = self._extract_vectorized(text, threshold, top_k)
-        else:
-            results = self._extract_standard(text, threshold, top_k)
-            
-        return results'''
-
-    # Add this to EnhancedBM25Extractor in src/api/v2/routes/bm25_extractor_V2.py
 
     def extract_techniques(
         self, text: str, threshold: float = 0.1, top_k: int = 10, job_id: str = None

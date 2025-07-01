@@ -479,14 +479,14 @@ async def extract_techniques_streaming(
     tier = user.get("tier", "basic")
 
     # Check tier permissions - streaming only available for premium and enterprise
-    '''if tier == "basic":
+    if tier == "basic":
         return JSONResponse(
             status_code=403,
             content={
                 "error": "Feature not available",
                 "detail": "Streaming extraction requires premium or enterprise tier",
             },
-        )'''
+        )
 
     # Get extraction manager
     manager = get_extraction_manager()

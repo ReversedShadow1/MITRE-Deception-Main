@@ -362,44 +362,6 @@ class EnhancedRuleBasedExtractor:
 
         return patterns
 
-    '''def extract_techniques(
-        self, 
-        text: str, 
-        min_confidence: float = 0.1, 
-        max_results: int = 10
-    ) -> List[Dict]:
-        """
-        Extract techniques using enhanced rule-based matching
-        
-        Args:
-            text: Input text to analyze
-            min_confidence: Minimum confidence threshold
-            max_results: Maximum number of results to return
-            
-        Returns:
-            List of technique matches with confidence scores
-        """
-        # Get matches using the most efficient method
-        if self.use_aho_corasick:
-            matches = self._extract_with_aho_corasick(text)
-        else:
-            matches = self._extract_with_regex(text)
-            
-        # Apply contextual pattern matching to enhance results
-        if self.use_contextual_boost:
-            self._apply_contextual_patterns(text, matches)
-            
-        # Convert matches to results with confidence scoring
-        results = self._score_matches(matches)
-        
-        # Filter by confidence threshold
-        results = [r for r in results if r["confidence"] >= min_confidence]
-        
-        # Sort by confidence (descending) and limit results
-        results.sort(key=lambda x: x["confidence"], reverse=True)
-        return results[:max_results]'''
-
-    # Add this to EnhancedRuleBasedExtractor in src/api/v2/routes/rule_based_V2.py
 
     def extract_techniques(
         self,
