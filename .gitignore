@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# Environment files
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Models & Data
+models/*
+!models/.gitkeep
+data/*
+!data/.gitkeep
+!data/kev_cve_attack.csv
+!data/kev_cve_cwe.csv
+!data/technique_keywords.json
+# Logs
+logs/
+*.log
+
+# SSL
+ssl/
+*.pem
+
+# Docker
+.docker/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Notebooks
+.ipynb_checkpoints
+*.ipynb

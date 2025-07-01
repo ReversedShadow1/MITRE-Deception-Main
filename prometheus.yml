@@ -1,0 +1,41 @@
+# prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+rule_files:
+  - '/etc/prometheus/alert.rules.yml'
+
+scrape_configs:
+  # API metrics
+  - job_name: 'attack_extractor'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['app:8001']
+
+  # Neo4j metrics
+  - job_name: 'neo4j'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['localhost:2004']
+
+  # PostgreSQL metrics
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+
+  # Redis metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

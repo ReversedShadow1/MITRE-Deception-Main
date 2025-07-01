@@ -1,0 +1,427 @@
+# Enhanced .github/workflows/production-cicd.yml
+
+name: Production CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PYTHON_VERSION: '3.10'
+  DOCKER_REGISTRY: 'docker.io'
+  IMAGE_NAME: 'attack_extractor'
+  NEO4J_TEST_PASSWORD: 'testpass'
+
+jobs:
+  # Stage 1: Code Quality with Auto-Fix
+  code-quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Need write permission to push changes
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}  # Check out the PR branch
+        token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in token
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install black==23.11.0 isort==5.12.0 mypy==1.7.0 flake8==6.1.0 bandit==1.7.5
+    
+    - name: Fix code formatting with Black
+      id: black
+      run: |
+        # Run Black to auto-format code
+        black .
+        # Check if there are changes
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "black_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "black_changes=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Fix import sorting with isort
+      id: isort
+      run: |
+        # Configure isort to be compatible with Black
+        echo "[settings]" > .isort.cfg
+        echo "profile=black" >> .isort.cfg
+        echo "line_length=88" >> .isort.cfg
+        
+        # Run isort to auto-sort imports
+        isort .
+        # Check if there are changes
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "isort_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "isort_changes=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Run flake8 (report only)
+      id: flake8
+      run: |
+        # Create flake8 config
+        echo "[flake8]" > .flake8
+        echo "max-line-length = 88" >> .flake8
+        echo "extend-ignore = E203,E501" >> .flake8
+        
+        # Run flake8 and capture output
+        flake8_output=$(flake8 src tests 2>&1) || true
+        echo "Flake8 output:"
+        echo "$flake8_output"
+        
+        # Save issues to file for the PR comment
+        echo "$flake8_output" > flake8_issues.txt
+    
+    - name: Run mypy (report only)
+      id: mypy
+      run: |
+        # Run mypy and capture output
+        mypy_output=$(mypy --ignore-missing-imports src 2>&1) || true
+        echo "Mypy output:"
+        echo "$mypy_output"
+        
+        # Save issues to file for the PR comment
+        echo "$mypy_output" > mypy_issues.txt
+        
+    - name: Run Bandit security scanner
+      id: bandit
+      run: |
+        # Run bandit security scan
+        bandit_output=$(bandit -r src -f txt 2>&1) || true
+        echo "Bandit output:"
+        echo "$bandit_output"
+        
+        # Save issues to file for the PR comment
+        echo "$bandit_output" > bandit_issues.txt
+    
+    - name: Commit and push changes
+      id: commit
+      if: ${{ steps.black.outputs.black_changes == 'true' || steps.isort.outputs.isort_changes == 'true' }}
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        
+        git add .
+        git commit -m "🤖 Auto-format code with Black and isort"
+        git push
+        
+        echo "committed=true" >> $GITHUB_OUTPUT
+    
+    - name: Comment on PR with code quality report
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          let comment = '## 🤖 Code Quality Report\n\n';
+          
+          // Add info about auto-fixes if any were made
+          if ('${{ steps.commit.outputs.committed }}' === 'true') {
+            comment += '### ✅ Auto-fixes applied\n\n';
+            comment += 'I automatically fixed some code style issues. The fixes have been committed to your branch.\n\n';
+          } else {
+            comment += '### ✅ No style issues found\n\n';
+            comment += 'Your code already follows our style guidelines. Good job!\n\n';
+          }
+          
+          // Add flake8 issues if any
+          try {
+            const flake8Issues = fs.readFileSync('flake8_issues.txt', 'utf8').trim();
+            if (flake8Issues && flake8Issues.length > 0) {
+              comment += '### ⚠️ Linting issues (flake8)\n\n';
+              comment += 'These issues were found but not automatically fixed:\n\n';
+              comment += '```\n' + flake8Issues + '\n```\n\n';
+              comment += 'Consider fixing these manually in future PRs.\n\n';
+            }
+          } catch (error) {
+            console.log('No flake8 issues file found');
+          }
+          
+          // Add mypy issues if any
+          try {
+            const mypyIssues = fs.readFileSync('mypy_issues.txt', 'utf8').trim();
+            if (mypyIssues && mypyIssues.length > 0 && !mypyIssues.includes('Success')) {
+              comment += '### ⚠️ Type checking issues (mypy)\n\n';
+              comment += 'These issues were found but not automatically fixed:\n\n';
+              comment += '```\n' + mypyIssues + '\n```\n\n';
+              comment += 'Consider fixing these manually in future PRs.\n\n';
+            }
+          } catch (error) {
+            console.log('No mypy issues file found');
+          }
+          
+          // Add bandit security issues if any
+          try {
+            const banditIssues = fs.readFileSync('bandit_issues.txt', 'utf8').trim();
+            if (banditIssues && banditIssues.length > 0 && banditIssues.includes('Issue:')) {
+              comment += '### 🔒 Security issues (bandit)\n\n';
+              comment += 'These security issues were found in your code:\n\n';
+              comment += '```\n' + banditIssues + '\n```\n\n';
+              comment += 'Please address these security concerns before merging.\n\n';
+            }
+          } catch (error) {
+            console.log('No bandit issues file found');
+          }
+          
+          // Post the comment on the PR
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+
+  # Stage 2: Unit Tests
+  unit-tests:
+    needs: code-quality
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+          - 5672:5672
+          - 15672:15672
+      
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}  # Use latest commit after auto-fixes
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        # Install additional test dependencies
+        pip install pytest pytest-cov pytest-asyncio pytest-mock httpx
+        
+        # Add current directory to PYTHONPATH to find the 'src' module
+        echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
+    
+    - name: Run unit tests
+      env:
+        REDIS_URL: redis://localhost:6379
+        RABBITMQ_URL: amqp://guest:guest@localhost:5672/%2F
+      run: |
+        # Create directories if they don't exist (to avoid import errors)
+        mkdir -p data models logs
+        
+        pytest tests/unit -v --cov=src --cov-report=xml
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+
+  # Stage 3: Integration Tests (FIXED)
+  integration-tests:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+        
+    - name: Set up test environment
+      run: |
+        # Create a temporary file with the RabbitMQ service definition
+        cat > rabbitmq-service.yml << 'EOL'
+        rabbitmq:
+          image: rabbitmq:3-management
+          ports:
+            - "5672:5672"
+            - "15672:15672"
+          healthcheck:
+            test: ["CMD", "rabbitmqctl", "status"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+          restart: unless-stopped
+        EOL
+        
+        # Modify docker-compose.ci.yml to set MODEL_MOCKING=true and increase memory
+        sed -i 's/AUTO_DOWNLOAD_MODELS=false/AUTO_DOWNLOAD_MODELS=false\n      - MODEL_MOCKING=true/' docker-compose.ci.yml
+        sed -i 's/NEO4J_dbms_memory_heap_max__size=512M/NEO4J_dbms_memory_heap_max__size=1G/' docker-compose.ci.yml
+        
+        # Add RabbitMQ service by appending the file
+        cat rabbitmq-service.yml >> docker-compose.ci.yml
+        
+        # Add RabbitMQ URL environment variable
+        sed -i 's/REDIS_URL=redis:\/\/redis:6379/REDIS_URL=redis:\/\/redis:6379\n      - RABBITMQ_URL=amqp:\/\/guest:guest@rabbitmq:5672\/%2F/' docker-compose.ci.yml
+        
+        # Start services
+        docker compose -f docker-compose.ci.yml up -d
+    
+    - name: Check app logs to debug startup issues
+      run: |
+        # Wait a bit for logs to populate
+        sleep 10
+        docker compose -f docker-compose.ci.yml logs app
+        
+    - name: Create pre-download marker for models to skip download
+      run: |
+        # Create empty marker file to skip model download step
+        docker compose -f docker-compose.ci.yml exec -T app mkdir -p /app/models
+        docker compose -f docker-compose.ci.yml exec -T app touch /app/models/.download_complete
+        
+    - name: Restart app after creating marker
+      run: |
+        docker compose -f docker-compose.ci.yml restart app
+        
+    - name: Wait for services with increased timeout
+      run: |
+        # More detailed waiting with better feedback
+        timeout 300 bash -c '
+          COUNTER=0
+          until curl -s http://localhost:8000/health | grep -q "healthy" || [ $COUNTER -gt 30 ]; do
+            echo "Waiting for app to start... attempt $COUNTER"
+            if [ $((COUNTER % 5)) -eq 0 ]; then
+              echo "--- App Logs ---"
+              docker compose -f docker-compose.ci.yml logs --tail=20 app
+              echo "----------------"
+            fi
+            sleep 10
+            COUNTER=$((COUNTER+1))
+          done
+          
+          if [ $COUNTER -gt 30 ]; then
+            echo "App failed to start in time"
+            docker compose -f docker-compose.ci.yml logs app
+            exit 1
+          fi
+        '
+    
+    - name: Run integration tests
+      run: |
+        docker compose -f docker-compose.ci.yml exec -T app pytest tests/integration -v
+        
+    - name: Run API integration tests
+      run: |
+        # Install API test dependencies
+        pip install pytest requests
+        
+        # Run external API tests
+        python -m pytest tests/api -v
+    
+    - name: Cleanup
+      if: always()
+      run: docker compose -f docker-compose.ci.yml down -v
+
+  # New stage: Security Scanning
+  security-scan:
+    needs: integration-tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install security scanning tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit safety
+        
+    - name: Run Bandit security scan
+      run: |
+        bandit -r src -f html -o bandit-report.html
+        
+    - name: Check for vulnerable dependencies
+      run: |
+        safety check -r requirements.txt --full-report -o text > safety-report.txt || true
+        
+    - name: Run OWASP Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'ATT&CK-Extractor'
+        path: '.'
+        format: 'HTML'
+        out: 'reports'
+        
+    - name: Archive security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          bandit-report.html
+          safety-report.txt
+          reports/
+
+  # Stage 4: Build Images
+  build-images:
+    needs: [integration-tests, security-scan]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}  # Use latest commit after auto-fixes
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Login to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          ${{ env.DOCKER_REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ env.DOCKER_REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Scan Docker image for vulnerabilities
+      if: github.event_name != 'pull_request'
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: '${{ env.DOCKER_REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL,HIGH'
+        
+    - name: Upload Trivy scan results to GitHub Security tab
+      if: github.event_name != 'pull_request'
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'

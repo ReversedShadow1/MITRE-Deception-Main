@@ -1,0 +1,51 @@
+groups:
+- name: attack-extractor-alerts
+  rules:
+  # API Health
+  - alert: APIResponseTime
+    expr: histogram_quantile(0.95, rate(attack_extraction_processing_seconds_bucket[5m])) > 5
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High API response time"
+      description: "95th percentile response time is {{ $value }} seconds"
+
+  - alert: APIErrorRate
+    expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+    for: 10m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High API error rate"
+      description: "Error rate is {{ $value | humanizePercentage }}"
+
+  # Queue Health
+  - alert: QueueBacklog
+    expr: sum(rq_current_jobs{state="queued"}) > 100
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High number of queued jobs"
+      description: "{{ $value }} jobs are queued"
+
+  # Database Health
+  - alert: Neo4jConnectionPool
+    expr: neo4j_bolt_connections_opened - neo4j_bolt_connections_closed > 50
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High number of open Neo4j connections"
+      description: "{{ $value }} connections are open"
+
+  # Resource Alerts
+  - alert: HighMemoryUsage
+    expr: container_memory_usage_bytes / container_spec_memory_limit_bytes > 0.9
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High memory usage"
+      description: "Container is using {{ $value | humanizePercentage }} of available memory"
