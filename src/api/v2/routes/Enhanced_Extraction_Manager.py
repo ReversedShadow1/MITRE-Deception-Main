@@ -86,7 +86,6 @@ class EnhancedExtractionManager:
         self.use_neo4j = use_neo4j
         self.max_workers = max_workers
 
-
         from src.database.postgresql import get_db
 
         self.db = get_db()

@@ -309,7 +309,6 @@ class AdvancedEnsembleMethod:
 
         return related_techniques
 
-
     def ensemble_extractors(
         self,
         text: str,

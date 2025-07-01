@@ -1,0 +1,322 @@
+src/api/app.py:70:1: E402 module level import not at top of file
+src/api/app.py:71:1: E402 module level import not at top of file
+src/api/app.py:72:1: E402 module level import not at top of file
+src/api/app.py:73:1: E402 module level import not at top of file
+src/api/main.py:5:1: F401 'starlette.middleware.cors.CORSMiddleware' imported but unused
+src/api/middleware/auth.py:8:1: F401 'time' imported but unused
+src/api/middleware/auth.py:10:1: F401 'typing.Union' imported but unused
+src/api/middleware/rate_limit.py:6:1: F401 'time' imported but unused
+src/api/middleware/rate_limit.py:7:1: F401 'typing.Dict' imported but unused
+src/api/middleware/rate_limit.py:7:1: F401 'typing.Optional' imported but unused
+src/api/middleware/rate_limit.py:9:1: F401 'fastapi.Response' imported but unused
+src/api/middleware/security.py:9:1: F401 'typing.Callable' imported but unused
+src/api/middleware/security.py:11:1: F401 'fastapi.Depends' imported but unused
+src/api/middleware/security.py:12:1: F401 'fastapi.middleware.cors.CORSMiddleware' imported but unused
+src/api/middleware/security.py:184:9: E722 do not use bare 'except'
+src/api/v1/routes/extract.py:8:1: F401 'fastapi.BackgroundTasks' imported but unused
+src/api/v1/routes/extract.py:312:1: F811 redefinition of unused 'extract_techniques' from line 84
+src/api/v1/routes/feedback.py:8:1: F401 'fastapi.Header' imported but unused
+src/api/v1/routes/feedback.py:122:56: W291 trailing whitespace
+src/api/v1/routes/feedback.py:124:78: W291 trailing whitespace
+src/api/v1/routes/feedback.py:198:71: W291 trailing whitespace
+src/api/v1/routes/feedback.py:200:31: W291 trailing whitespace
+src/api/v1/routes/feedback.py:251:60: W291 trailing whitespace
+src/api/v1/routes/feedback.py:253:82: W291 trailing whitespace
+src/api/v1/routes/health.py:7:1: F401 'typing.Dict' imported but unused
+src/api/v1/routes/health.py:100:13: F841 local variable 'e' is assigned to but never used
+src/api/v2/routes/API_Implementation.py:11:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/API_Implementation.py:13:1: F401 'fastapi.BackgroundTasks' imported but unused
+src/api/v2/routes/API_Implementation.py:13:1: F401 'fastapi.Query' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:12:1: F401 'collections.Counter' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:12:1: F401 'collections.defaultdict' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:13:1: F401 'typing.Any' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:13:1: F401 'typing.Optional' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:13:1: F401 'typing.Tuple' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:13:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/Advanced_Ensemble.py:15:1: F401 'numpy as np' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:7:1: F401 'asyncio' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:10:1: F401 'os' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:12:1: F401 'functools.lru_cache' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:13:1: F401 'typing.Any' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:13:1: F401 'typing.Optional' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:13:1: F401 'typing.Set' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:13:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:35:1: F401 'src.database.postgresql.get_db' imported but unused
+src/api/v2/routes/Enhanced_Extraction_Manager.py:89:9: F811 redefinition of unused 'get_db' from line 35
+src/api/v2/routes/Enhanced_Extraction_Manager.py:339:9: F841 local variable 'metrics_recorder' is assigned to but never used
+src/api/v2/routes/Enhanced_Extraction_Manager.py:856:28: W291 trailing whitespace
+src/api/v2/routes/Enhanced_Extraction_Manager.py:863:28: W291 trailing whitespace
+src/api/v2/routes/Extraction_Result_Cache.py:13:1: F401 'datetime.timedelta' imported but unused
+src/api/v2/routes/Extraction_Result_Cache.py:14:1: F401 'typing.Any' imported but unused
+src/api/v2/routes/Extraction_Result_Cache.py:14:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/Optimized_Cache.py:7:1: F401 'typing.List' imported but unused
+src/api/v2/routes/Optimized_Cache.py:7:1: F401 'typing.Set' imported but unused
+src/api/v2/routes/Optimized_Cache.py:7:1: F401 'typing.Tuple' imported but unused
+src/api/v2/routes/Optimized_Cache.py:7:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/Optimized_Cache.py:202:21: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:409:29: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:450:25: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:506:29: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:537:13: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:548:13: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:579:1: F811 redefinition of unused 'json' from line 3
+src/api/v2/routes/Optimized_Cache.py:579:1: E402 module level import not at top of file
+src/api/v2/routes/Optimized_Cache.py:581:1: F811 redefinition of unused 'Request' from line 10
+src/api/v2/routes/Optimized_Cache.py:581:1: F401 'fastapi.FastAPI' imported but unused
+src/api/v2/routes/Optimized_Cache.py:581:1: E402 module level import not at top of file
+src/api/v2/routes/Optimized_Cache.py:582:1: F811 redefinition of unused 'JSONResponse' from line 11
+src/api/v2/routes/Optimized_Cache.py:582:1: E402 module level import not at top of file
+src/api/v2/routes/Optimized_Cache.py:583:1: E402 module level import not at top of file
+src/api/v2/routes/Optimized_Cache.py:661:17: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:692:13: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Cache.py:706:9: E722 do not use bare 'except'
+src/api/v2/routes/Optimized_Neural_Extractor.py:13:1: F401 'typing.Optional' imported but unused
+src/api/v2/routes/Optimized_Neural_Extractor.py:13:1: F401 'typing.Set' imported but unused
+src/api/v2/routes/Optimized_Neural_Extractor.py:13:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/Optimized_Neural_Extractor.py:1284:24: E741 ambiguous variable name 'I'
+src/api/v2/routes/bm25_extractor_V2.py:13:1: F401 'typing.Any' imported but unused
+src/api/v2/routes/bm25_extractor_V2.py:13:1: F401 'typing.Optional' imported but unused
+src/api/v2/routes/bm25_extractor_V2.py:13:1: F401 'typing.Set' imported but unused
+src/api/v2/routes/bm25_extractor_V2.py:13:1: F401 'typing.Tuple' imported but unused
+src/api/v2/routes/bm25_extractor_V2.py:13:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/extract.py:10:1: F401 'typing.Union' imported but unused
+src/api/v2/routes/extract.py:12:1: F401 'fastapi.BackgroundTasks' imported but unused
+src/api/v2/routes/extract.py:12:1: F401 'fastapi.Query' imported but unused
+src/api/v2/routes/rule_based_V2.py:11:1: F401 'typing.Any' imported but unused
+src/api/v2/routes/rule_based_V2.py:11:1: F401 'typing.Optional' imported but unused
+src/api/v2/routes/rule_based_V2.py:11:1: F401 'typing.Set' imported but unused
+src/api/v2/routes/rule_based_V2.py:175:17: F541 f-string is missing placeholders
+src/data_manager.py:11:1: F401 'typing.Any' imported but unused
+src/data_manager.py:11:1: F401 'typing.Optional' imported but unused
+src/data_manager.py:11:1: F401 'typing.Set' imported but unused
+src/data_manager.py:11:1: F401 'typing.Tuple' imported but unused
+src/data_manager.py:11:1: F401 'typing.Union' imported but unused
+src/database/__init__.py:13:5: F401 '.connection_pool.get_pooled_db' imported but unused
+src/database/connection_pool.py:4:1: F401 'typing.Optional' imported but unused
+src/database/metrics_recorder.py:3:1: F401 'json' imported but unused
+src/database/metrics_recorder.py:5:1: F401 'time' imported but unused
+src/database/metrics_recorder.py:8:1: F401 'typing.Any' imported but unused
+src/database/metrics_recorder.py:8:1: F401 'typing.Union' imported but unused
+src/database/metrics_recorder.py:319:75: W291 trailing whitespace
+src/database/metrics_recorder.py:426:82: W291 trailing whitespace
+src/database/metrics_recorder.py:427:81: W291 trailing whitespace
+src/database/models.py:7:1: F401 'typing.Union' imported but unused
+src/database/models.py:10:1: F401 'pydantic.validator' imported but unused
+src/database/neo4j.py:5:1: F401 'typing.Any' imported but unused
+src/database/neo4j.py:5:1: F401 'typing.Optional' imported but unused
+src/database/neo4j.py:7:1: F401 'neo4j.Driver' imported but unused
+src/database/neo4j.py:7:1: F401 'neo4j.Session' imported but unused
+src/database/sync_manager.py:4:1: F401 'time' imported but unused
+src/database/sync_manager.py:6:1: F401 'typing.Any' imported but unused
+src/database/sync_manager.py:6:1: F401 'typing.Set' imported but unused
+src/database/sync_manager.py:8:1: F401 'psycopg2' imported but unused
+src/database/sync_manager.py:9:1: F401 'schedule' imported but unused
+src/database/sync_manager.py:10:1: F401 'neo4j.GraphDatabase' imported but unused
+src/database/sync_manager.py:11:1: F401 'psycopg2.extras.Json' imported but unused
+src/database/sync_manager.py:11:1: F401 'psycopg2.extras.RealDictCursor' imported but unused
+src/database/sync_manager.py:38:54: W291 trailing whitespace
+src/database/sync_manager.py:239:34: W291 trailing whitespace
+src/database/sync_manager.py:240:31: W291 trailing whitespace
+src/database/sync_manager.py:289:15: W291 trailing whitespace
+src/database/sync_manager.py:326:15: W291 trailing whitespace
+src/database/sync_manager.py:361:75: W291 trailing whitespace
+src/database/sync_manager.py:364:37: W291 trailing whitespace
+src/database/sync_manager.py:371:75: W291 trailing whitespace
+src/database/sync_manager.py:403:73: W291 trailing whitespace
+src/database/sync_manager.py:411:73: W291 trailing whitespace
+src/database/sync_manager.py:441:80: W291 trailing whitespace
+src/database/sync_manager.py:480:19: W291 trailing whitespace
+src/database/sync_manager.py:495:19: W291 trailing whitespace
+src/database/sync_manager.py:608:50: W291 trailing whitespace
+src/database/sync_manager.py:628:47: W291 trailing whitespace
+src/database/sync_manager.py:668:45: W291 trailing whitespace
+src/database/sync_manager.py:669:35: W291 trailing whitespace
+src/database/sync_manager.py:670:42: W291 trailing whitespace
+src/database/sync_manager.py:671:46: W291 trailing whitespace
+src/database/sync_manager.py:672:50: W291 trailing whitespace
+src/database/sync_manager.py:673:34: W291 trailing whitespace
+src/database/sync_manager.py:674:38: W291 trailing whitespace
+src/database/sync_manager.py:695:42: W291 trailing whitespace
+src/database/sync_manager.py:696:35: W291 trailing whitespace
+src/database/sync_manager.py:697:42: W291 trailing whitespace
+src/database/sync_manager.py:698:34: W291 trailing whitespace
+src/enhanced_attack_extractor.py:16:1: F401 'typing.Any' imported but unused
+src/enhanced_attack_extractor.py:16:1: F401 'typing.Optional' imported but unused
+src/enhanced_attack_extractor.py:16:1: F401 'typing.Set' imported but unused
+src/enhanced_attack_extractor.py:16:1: F401 'typing.Tuple' imported but unused
+src/enhanced_attack_extractor.py:16:1: F401 'typing.Union' imported but unused
+src/enhanced_attack_extractor.py:18:1: F401 'numpy as np' imported but unused
+src/enhanced_attack_extractor.py:21:1: F401 'prometheus_client.Counter' imported but unused
+src/enhanced_attack_extractor.py:21:1: F401 'prometheus_client.Histogram' imported but unused
+src/enhanced_attack_extractor.py:22:1: F401 'requests.Request' imported but unused
+src/enhanced_attack_extractor.py:23:1: F401 'starlette_prometheus.PrometheusMiddleware' imported but unused
+src/enhanced_attack_extractor.py:23:1: F401 'starlette_prometheus.metrics' imported but unused
+src/enhanced_attack_extractor.py:25:1: F401 'src.database.models.AnalysisResponse' imported but unused
+src/enhanced_attack_extractor.py:124:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:159:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:192:23: W291 trailing whitespace
+src/enhanced_attack_extractor.py:207:23: W291 trailing whitespace
+src/enhanced_attack_extractor.py:220:29: E722 do not use bare 'except'
+src/enhanced_attack_extractor.py:246:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:269:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:301:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:331:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:364:15: W291 trailing whitespace
+src/enhanced_attack_extractor.py:392:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:393:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:394:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:395:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:396:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:400:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:401:1: E402 module level import not at top of file
+src/enhanced_attack_extractor.py:673:21: F821 undefined name 'MODEL_LOAD_TIME'
+src/enhanced_attack_extractor.py:717:21: F821 undefined name 'MODEL_LOAD_TIME'
+src/enhanced_attack_extractor.py:761:21: F821 undefined name 'MODEL_LOAD_TIME'
+src/enhanced_attack_extractor.py:1849:68: W291 trailing whitespace
+src/enhanced_attack_extractor.py:1850:72: W291 trailing whitespace
+src/enhanced_attack_extractor.py:1851:28: W291 trailing whitespace
+src/enhanced_attack_extractor.py:1964:39: W291 trailing whitespace
+src/enhanced_attack_extractor.py:2097:18: F821 undefined name 'Redis'
+src/enhanced_attack_extractor.py:2098:13: F821 undefined name 'Queue'
+src/enhanced_attack_extractor.py:2167:40: W291 trailing whitespace
+src/extractors/bm25_extractor.py:12:1: F401 'typing.Any' imported but unused
+src/extractors/bm25_extractor.py:12:1: F401 'typing.Optional' imported but unused
+src/extractors/bm25_extractor.py:14:1: F401 'numpy as np' imported but unused
+src/extractors/classifier.py:11:1: F401 'typing.Any' imported but unused
+src/extractors/classifier.py:11:1: F401 'typing.Optional' imported but unused
+src/extractors/classifier.py:11:1: F401 'typing.Tuple' imported but unused
+src/extractors/classifier.py:11:1: F401 'typing.Union' imported but unused
+src/extractors/classifier.py:17:1: F401 'transformers.AutoModelForTokenClassification' imported but unused
+src/extractors/classifier.py:628:9: F841 local variable 'text_embedding' is assigned to but never used
+src/extractors/kev_extractor.py:11:1: F401 'typing.Any' imported but unused
+src/extractors/kev_extractor.py:11:1: F401 'typing.Optional' imported but unused
+src/extractors/kev_extractor.py:139:21: E722 do not use bare 'except'
+src/extractors/ner_extractor.py:10:1: F401 'typing.Any' imported but unused
+src/extractors/ner_extractor.py:10:1: F401 'typing.Optional' imported but unused
+src/extractors/ner_extractor.py:10:1: F401 'typing.Tuple' imported but unused
+src/extractors/ner_extractor.py:12:1: F401 'numpy as np' imported but unused
+src/extractors/ner_extractor.py:14:1: F401 'transformers.PreTrainedModel' imported but unused
+src/extractors/ner_extractor.py:14:1: F401 'transformers.PreTrainedTokenizer' imported but unused
+src/extractors/ner_extractor.py:130:17: F541 f-string is missing placeholders
+src/extractors/ner_extractor.py:133:13: F841 local variable 'download_timeout' is assigned to but never used
+src/extractors/rule_based.py:10:1: F401 'typing.Any' imported but unused
+src/extractors/rule_based.py:10:1: F401 'typing.Optional' imported but unused
+src/extractors/rule_based.py:10:1: F401 'typing.Set' imported but unused
+src/extractors/semantic.py:11:1: F401 'typing.Any' imported but unused
+src/extractors/semantic.py:11:1: F401 'typing.Optional' imported but unused
+src/extractors/semantic.py:11:1: F401 'typing.Tuple' imported but unused
+src/extractors/semantic.py:132:17: F541 f-string is missing placeholders
+src/extractors/semantic.py:135:13: F841 local variable 'download_timeout' is assigned to but never used
+src/integrations/kev_mapper.py:8:1: F401 'csv' imported but unused
+src/integrations/kev_mapper.py:9:1: F401 'json' imported but unused
+src/integrations/kev_mapper.py:13:1: F401 'typing.Optional' imported but unused
+src/integrations/kev_mapper.py:13:1: F401 'typing.Set' imported but unused
+src/integrations/kev_mapper.py:13:1: F401 'typing.Tuple' imported but unused
+src/integrations/kev_mapper.py:13:1: F401 'typing.Union' imported but unused
+src/mitre_integration.py:8:1: F401 'xml.etree.ElementTree as ET' imported but unused
+src/mitre_integration.py:12:1: F401 'typing.Any' imported but unused
+src/mitre_integration.py:12:1: F401 'typing.Optional' imported but unused
+src/mitre_integration.py:12:1: F401 'typing.Tuple' imported but unused
+src/mitre_integration.py:181:26: W291 trailing whitespace
+src/mitre_integration.py:187:25: W291 trailing whitespace
+src/mitre_integration.py:235:30: W291 trailing whitespace
+src/mitre_integration.py:247:29: W291 trailing whitespace
+src/mitre_integration.py:322:30: W291 trailing whitespace
+src/mitre_integration.py:330:29: W291 trailing whitespace
+src/mitre_integration.py:369:30: W291 trailing whitespace
+src/mitre_integration.py:378:29: W291 trailing whitespace
+src/mitre_integration.py:417:73: W291 trailing whitespace
+src/mitre_integration.py:418:41: W291 trailing whitespace
+src/mitre_integration.py:419:73: W291 trailing whitespace
+src/mitre_integration.py:420:28: W291 trailing whitespace
+src/mitre_integration.py:441:34: W291 trailing whitespace
+src/mitre_integration.py:469:30: W291 trailing whitespace
+src/mitre_integration.py:476:29: W291 trailing whitespace
+src/mitre_integration.py:537:30: W291 trailing whitespace
+src/mitre_integration.py:543:29: W291 trailing whitespace
+src/mitre_integration.py:602:34: W291 trailing whitespace
+src/mitre_integration.py:607:33: W291 trailing whitespace
+src/mitre_integration.py:719:30: W291 trailing whitespace
+src/mitre_integration.py:728:29: W291 trailing whitespace
+src/mitre_integration.py:978:34: W291 trailing whitespace
+src/mitre_integration.py:995:33: W291 trailing whitespace
+src/mitre_integration.py:1036:38: W291 trailing whitespace
+src/mitre_integration.py:1039:37: W291 trailing whitespace
+src/mitre_integration.py:1058:38: W291 trailing whitespace
+src/mitre_integration.py:1061:37: W291 trailing whitespace
+src/mitre_integration.py:1181:30: W291 trailing whitespace
+src/mitre_integration.py:1182:47: W291 trailing whitespace
+src/mitre_integration.py:1186:17: F841 local variable 'result' is assigned to but never used
+src/mitre_integration.py:1646:34: W291 trailing whitespace
+src/mitre_integration.py:1658:33: W291 trailing whitespace
+src/mitre_integration.py:1677:38: W291 trailing whitespace
+src/mitre_integration.py:1680:37: W291 trailing whitespace
+src/mitre_integration.py:1873:34: W291 trailing whitespace
+src/mitre_integration.py:1876:33: W291 trailing whitespace
+src/mitre_integration.py:1878:24: W291 trailing whitespace
+src/mitre_integration.py:1893:34: W291 trailing whitespace
+src/mitre_integration.py:1896:33: W291 trailing whitespace
+src/mitre_integration.py:1898:24: W291 trailing whitespace
+src/mitre_integration.py:1912:34: W291 trailing whitespace
+src/mitre_integration.py:1915:33: W291 trailing whitespace
+src/mitre_integration.py:1917:24: W291 trailing whitespace
+src/mitre_integration.py:1931:34: W291 trailing whitespace
+src/mitre_integration.py:1934:33: W291 trailing whitespace
+src/mitre_integration.py:1936:24: W291 trailing whitespace
+src/mitre_integration.py:1985:38: W291 trailing whitespace
+src/mitre_integration.py:1988:37: W291 trailing whitespace
+src/mitre_integration.py:1990:1: W293 blank line contains whitespace
+src/mitre_integration.py:1994:38: W291 trailing whitespace
+src/mitre_integration.py:2051:17: F841 local variable 'attack_name' is assigned to but never used
+src/mitre_integration.py:2064:34: W291 trailing whitespace
+src/mitre_integration.py:2085:34: W291 trailing whitespace
+src/mitre_integration.py:2104:34: W291 trailing whitespace
+src/mitre_integration.py:2230:51: F841 local variable 'executor' is assigned to but never used
+src/mitre_integration.py:2552:9: E722 do not use bare 'except'
+src/monitoring/logging_setup.py:8:1: F401 'typing.Any' imported but unused
+src/monitoring/logging_setup.py:8:1: F401 'typing.Dict' imported but unused
+src/monitoring/logging_setup.py:8:1: F401 'typing.Optional' imported but unused
+src/monitoring/logging_setup.py:10:1: F401 'elasticsearch' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.Any' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.Dict' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.List' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.Optional' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.Tuple' imported but unused
+src/monitoring/metrics.py:2:1: F401 'typing.Union' imported but unused
+src/monitoring/metrics.py:4:1: F401 'prometheus_client.Summary' imported but unused
+src/monitoring/middleware.py:2:1: F401 'typing.Callable' imported but unused
+src/preprocessing/text_chunker.py:1:1: F401 're' imported but unused
+src/preprocessing/text_chunker.py:3:1: F401 'typing.Optional' imported but unused
+src/preprocessing/text_processor.py:2:1: F401 'html' imported but unused
+src/preprocessing/text_processor.py:4:1: F401 'os' imported but unused
+src/preprocessing/text_processor.py:8:1: F401 'typing.Any' imported but unused
+src/preprocessing/text_processor.py:8:1: F401 'typing.Dict' imported but unused
+src/preprocessing/text_processor.py:8:1: F401 'typing.Optional' imported but unused
+src/preprocessing/text_processor.py:181:13: F601 dictionary key 'cissp' repeated with different values
+src/preprocessing/text_processor.py:233:13: F601 dictionary key 'cissp' repeated with different values
+src/preprocessing/text_processor.py:369:9: E722 do not use bare 'except'
+src/preprocessing/text_processor.py:435:9: F841 local variable 'e' is assigned to but never used
+src/queue/auto_scaling.py:5:1: F401 'typing.List' imported but unused
+src/queue/auto_scaling.py:8:1: F401 'rq.Worker' imported but unused
+src/queue/auto_scaling.py:9:1: F401 'rq.job.Job' imported but unused
+src/queue/manager.py:14:1: F401 'rq.Connection' imported but unused
+src/queue/manager.py:14:1: F401 'rq.Worker' imported but unused
+src/queue/manager.py:125:9: F841 local variable 'neo4j' is assigned to but never used
+src/queue/manager.py:163:49: W291 trailing whitespace
+src/queue/manager.py:183:37: W291 trailing whitespace
+src/queue/manager.py:184:42: W291 trailing whitespace
+src/queue/manager.py:238:48: W291 trailing whitespace
+src/queue/manager.py:268:86: W291 trailing whitespace
+src/queue/manager.py:285:86: W291 trailing whitespace
+src/queue/manager.py:300:86: W291 trailing whitespace
+src/queue/manager.py:327:47: W291 trailing whitespace
+src/queue/manager.py:425:43: W291 trailing whitespace
+src/queue/worker.py:4:1: F401 'sys' imported but unused
+src/queue/worker.py:28:5: F841 local variable 'queue_manager' is assigned to but never used
+src/validation/quality_checks.py:2:1: F401 'json' imported but unused
+src/validation/quality_checks.py:6:1: F401 'typing.Any' imported but unused
+src/validation/quality_checks.py:6:1: F401 'typing.Optional' imported but unused
+src/validation/quality_checks.py:6:1: F401 'typing.Set' imported but unused
+src/validation/quality_checks.py:6:1: F401 'typing.Tuple' imported but unused
+src/validation/quality_checks.py:209:31: F541 f-string is missing placeholders
+tests:0:1: E902 FileNotFoundError: [Errno 2] No such file or directory: 'tests'

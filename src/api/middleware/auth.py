@@ -31,7 +31,9 @@ def load_api_keys():
     """Load API keys from environment or database"""
     # For development/testing, load from environment variable
     test_api_key = os.environ.get("TEST_API_KEY")
-    test_user_uuid = os.environ.get("TEST_USER_UUID", "00000000-0000-0000-0000-000000000000")
+    test_user_uuid = os.environ.get(
+        "TEST_USER_UUID", "00000000-0000-0000-0000-000000000000"
+    )
     if test_api_key:
         API_KEYS[test_api_key] = {
             "user_id": test_user_uuid,

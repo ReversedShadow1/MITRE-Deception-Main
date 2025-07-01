@@ -1,0 +1,556 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.10.18
+Run started:2025-07-01 10:29:39.920414
+
+Test results:
+>> Issue: [B104:hardcoded_bind_all_interfaces] Possible binding to all interfaces.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-605 (https://cwe.mitre.org/data/definitions/605.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b104_hardcoded_bind_all_interfaces.html
+   Location: src/api/main.py:81:36
+80	        app,
+81	        host=os.environ.get("HOST", "0.0.0.0"),
+82	        port=int(os.environ.get("PORT", "8000")),
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/middleware/security.py:184:8
+183	            token = form_data.get("csrf_token")
+184	        except:
+185	            pass
+186	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v1/routes/health.py:140:8
+139	                neo4j_version = f"{version_result[0].get('name')} {version_result[0].get('versions')[0]}"
+140	        except Exception:
+141	            # If version query fails, just continue without version info
+142	            pass
+143	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b324_hashlib.html
+   Location: src/api/v2/routes/Extraction_Result_Cache.py:102:19
+101	        else:
+102	            return hashlib.md5(text.encode()).hexdigest()
+103	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b324_hashlib.html
+   Location: src/api/v2/routes/Extraction_Result_Cache.py:129:22
+128	        params_str = f"{threshold}_{top_k}_{use_ensemble}_{extractors_str}"
+129	        params_hash = hashlib.md5(params_str.encode()).hexdigest()[:8]
+130	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b324_hashlib.html
+   Location: src/api/v2/routes/Extraction_Result_Cache.py:381:30
+380	            extractors_str = ",".join(sorted(extractors))
+381	            extractors_hash = hashlib.md5(extractors_str.encode()).hexdigest()[:8]
+382	            count += self._invalidate_pattern(f"*_{extractors_hash}")
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b324_hashlib.html
+   Location: src/api/v2/routes/Optimized_Cache.py:107:15
+106	        # Generate hash
+107	        return hashlib.md5(key_str.encode()).hexdigest()
+108	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:202:20
+201	                        os.remove(file_path)
+202	                    except:
+203	                        pass
+204	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:409:28
+408	                                invalidated += 1
+409	                            except:
+410	                                pass
+411	                except Exception as e:
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:450:24
+449	                            os.remove(file_path)
+450	                        except:
+451	                            pass
+452	            except Exception as e:
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:506:28
+505	                                removed += 1
+506	                            except:
+507	                                pass
+508	            except Exception as e:
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:537:12
+536	                redis_size = self.redis_client.dbsize()
+537	            except:
+538	                pass
+539	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:548:12
+547	                file_size = file_count
+548	            except:
+549	                pass
+550	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:661:16
+660	                    )
+661	                except:
+662	                    # If we can't process the response, just return it as-is
+663	                    pass
+664	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/api/v2/routes/Optimized_Cache.py:706:8
+705	                auth_data["api_key"] = api_key
+706	        except:
+707	            pass
+708	
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: src/api/v2/routes/bm25_extractor_V2.py:10:0
+9	import os
+10	import pickle
+11	import re
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_calls.html#b301-pickle
+   Location: src/api/v2/routes/bm25_extractor_V2.py:268:34
+267	            with open(self.model_cache_path, "rb") as f:
+268	                self.bm25_model = pickle.load(f)
+269	
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_calls.html#b301-pickle
+   Location: src/api/v2/routes/bm25_extractor_V2.py:273:38
+272	                with open(self.vectorizer_cache_path, "rb") as f:
+273	                    self.vectorizer = pickle.load(f)
+274	
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b113_request_without_timeout.html
+   Location: src/data_manager.py:149:27
+148	                url = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+149	                response = requests.get(url)
+150	                response.raise_for_status()
+
+--------------------------------------------------
+>> Issue: [B107:hardcoded_password_default] Possible hardcoded password: 'postgres'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b107_hardcoded_password_default.html
+   Location: src/database/connection_pool.py:25:4
+24	
+25	    def __init__(
+26	        self,
+27	        host: str = "localhost",
+28	        port: int = 5432,
+29	        user: str = "postgres",
+30	        password: str = "postgres",
+31	        database: str = "attack_extractor",
+32	        min_connections: int = 5,
+33	        max_connections: int = 20,
+34	    ):
+35	        """Initialize the connection pool"""
+36	        self.connection_params = {
+37	            "host": host,
+38	            "port": port,
+39	            "user": user,
+40	            "password": password,
+41	            "database": database,
+42	        }
+43	        self.min_connections = min_connections
+44	        self.max_connections = max_connections
+45	        self._pool = None
+46	        self._create_pool()
+47	
+48	        # Performance metrics
+49	        self.connection_wait_time = 0
+50	        self.connection_request_count = 0
+51	        self.connection_errors = 0
+52	
+
+--------------------------------------------------
+>> Issue: [B107:hardcoded_password_default] Possible hardcoded password: 'password'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b107_hardcoded_password_default.html
+   Location: src/database/neo4j.py:15:4
+14	
+15	    def __init__(
+16	        self,
+17	        uri: str = "bolt://localhost:7687",
+18	        user: str = "neo4j",
+19	        password: str = "password",
+20	        database: str = "pipe",
+21	    ):
+22	        """Initialize Neo4j connection parameters"""
+23	        self.uri = uri
+24	        self.user = user
+25	        self.password = password
+26	        self.database = database
+27	        self.driver = None
+28	
+
+--------------------------------------------------
+>> Issue: [B107:hardcoded_password_default] Possible hardcoded password: 'postgres'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b107_hardcoded_password_default.html
+   Location: src/database/postgresql.py:16:4
+15	
+16	    def __init__(
+17	        self,
+18	        host: str = "localhost",
+19	        port: int = 5432,
+20	        user: str = "postgres",
+21	        password: str = "postgres",
+22	        database: str = "attack_extractor",
+23	    ):
+24	        """Initialize database connection parameters"""
+25	        self.host = host
+26	        self.port = port
+27	        self.user = user
+28	        self.password = password
+29	        self.database = database
+30	        self.conn = None
+31	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b324_hashlib.html
+   Location: src/database/sync_manager.py:584:15
+583	        # Calculate hash
+584	        return hashlib.md5(json_str.encode()).hexdigest()
+585	
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b608_hardcoded_sql_expressions.html
+   Location: src/database/sync_manager.py:745:16
+744	        format_strings = ",".join(["%s"] * len(entity_ids))
+745	        query = f"DELETE FROM {table_name} WHERE id IN ({format_strings})"
+746	
+
+--------------------------------------------------
+>> Issue: [B107:hardcoded_password_default] Possible hardcoded password: 'password'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b107_hardcoded_password_default.html
+   Location: src/enhanced_attack_extractor.py:409:4
+408	
+409	    def __init__(
+410	        self,
+411	        data_dir: str = "data",
+412	        models_dir: str = "models",
+413	        neo4j_uri: str = "bolt://localhost:7687",
+414	        neo4j_user: str = "neo4j",
+415	        neo4j_password: str = "password",
+416	        neo4j_database: str = "pipe",
+417	        use_gpu: bool = True,
+418	        auto_load: bool = False,
+419	        memory_efficient: bool = False,
+420	    ):
+421	        """
+422	        Initialize the enhanced ATT&CK technique extractor
+423	
+424	        Args:
+425	            data_dir: Directory containing ATT&CK data files
+426	            models_dir: Directory for model storage
+427	            neo4j_uri: URI for the Neo4j database
+428	            neo4j_user: Username for the Neo4j database
+429	            neo4j_password: Password for the Neo4j database
+430	            neo4j_database: Neo4j database name
+431	            use_gpu: Whether to use GPU acceleration if available
+432	            auto_load: Whether to auto-load all extractors on initialization
+433	            memory_efficient: Whether to operate in memory-efficient mode (load/unload models)
+434	        """
+435	        self.data_dir = data_dir
+436	        self.models_dir = models_dir
+437	        self.use_gpu = use_gpu and torch.cuda.is_available()
+438	        self.memory_efficient = memory_efficient
+439	
+440	        # Create directories if they don't exist
+441	        os.makedirs(data_dir, exist_ok=True)
+442	        os.makedirs(models_dir, exist_ok=True)
+443	
+444	        # Initialize Neo4j connector
+445	        logger.info("Initializing Neo4j connector...")
+446	        self.neo4j = Neo4jConnector(
+447	            neo4j_uri, neo4j_user, neo4j_password, neo4j_database
+448	        )
+449	        self.use_neo4j = self.neo4j.connect()
+450	
+451	        if not self.use_neo4j:
+452	            logger.warning("Failed to connect to Neo4j, falling back to local data")
+453	            # Initialize the data loader with auto-loading since we can't use Neo4j
+454	            logger.info("Initializing ATT&CK data loader...")
+455	            self.data_loader = ATTCKDataLoader(data_dir=data_dir, auto_load=True)
+456	            self.techniques = self.data_loader.techniques
+457	            self.technique_keywords = self.data_loader.technique_keywords
+458	        else:
+459	            # Load technique data and keywords from Neo4j
+460	            logger.info("Loading technique data from Neo4j...")
+461	            self.techniques = self.neo4j.get_all_techniques()
+462	
+463	            # Try to get keywords from Neo4j first, then fall back to file
+464	            self.technique_keywords = self.neo4j.get_technique_keywords()
+465	
+466	            # If no keywords in Neo4j, load from file
+467	            if not self.technique_keywords:
+468	                # Try to load from file
+469	                keywords_file = os.path.join(data_dir, "technique_keywords.json")
+470	                if os.path.exists(keywords_file):
+471	                    try:
+472	                        with open(keywords_file, "r", encoding="utf-8") as f:
+473	                            self.technique_keywords = json.load(f)
+474	                        logger.info(
+475	                            f"Loaded {len(self.technique_keywords)} technique keyword mappings from file"
+476	                        )
+477	                    except Exception as e:
+478	                        logger.error(f"Error loading technique keywords from file: {e}")
+479	                        self.technique_keywords = {}
+480	
+481	            # If still no keywords, generate basic ones
+482	            if not self.technique_keywords:
+483	                self.technique_keywords = self._generate_basic_keywords(self.techniques)
+484	
+485	                # Save generated keywords
+486	                try:
+487	                    keywords_file = os.path.join(data_dir, "technique_keywords.json")
+488	                    with open(keywords_file, "w", encoding="utf-8") as f:
+489	                        json.dump(self.technique_keywords, f, indent=2)
+490	                    logger.info(f"Saved generated keywords to {keywords_file}")
+491	                except Exception as e:
+492	                    logger.error(f"Error saving generated keywords: {e}")
+493	
+494	        if not self.techniques:
+495	            logger.error(
+496	                "No technique data loaded! Check Neo4j connection and data directory."
+497	            )
+498	            raise ValueError("No technique data loaded")
+499	
+500	        logger.info(
+501	            f"Loaded {len(self.techniques)} ATT&CK techniques and {len(self.technique_keywords)} keyword mappings"
+502	        )
+503	
+504	        # Initialize extractors dictionary
+505	        self.extractors = {}
+506	
+507	        # Initialize with auto_load if requested
+508	        if auto_load:
+509	            self._load_all_extractors()
+510	        else:
+511	            # Always initialize rule-based and BM25 extractors (lightweight)
+512	            self._load_rule_based()
+513	            self._load_bm25()
+514	            self._load_kev_extractor()
+515	
+516	            # Other extractors will be loaded on demand
+517	            self.extractors["ner"] = None
+518	            self.extractors["semantic"] = None
+519	            self.extractors["classifier"] = None
+520	
+521	        logger.info("Enhanced ATT&CK technique extractor initialized successfully")
+522	
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: src/extractors/bm25_extractor.py:10:0
+9	import os
+10	import pickle
+11	import time
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_calls.html#b301-pickle
+   Location: src/extractors/bm25_extractor.py:100:34
+99	            with open(self.model_cache_path, "rb") as f:
+100	                self.bm25_model = pickle.load(f)
+101	
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/extractors/kev_extractor.py:139:20
+138	                        entry_date = datetime.strptime(entry_date_str, "%Y-%m-%d")
+139	                    except:
+140	                        pass
+141	
+
+--------------------------------------------------
+>> Issue: [B405:blacklist] Using xml.etree.ElementTree to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.
+   Severity: Low   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_imports.html#b405-import-xml-etree
+   Location: src/mitre_integration.py:8:0
+7	import time
+8	import xml.etree.ElementTree as ET
+9	from concurrent.futures import ThreadPoolExecutor
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b113_request_without_timeout.html
+   Location: src/mitre_integration.py:2416:24
+2415	    try:
+2416	        head_response = requests.head(
+2417	            "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+2418	        )
+2419	        head_response.raise_for_status()
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b110_try_except_pass.html
+   Location: src/mitre_integration.py:2552:8
+2551	            manager.close()
+2552	        except:
+2553	            pass
+2554	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: src/queue/auto_scaling.py:188:8
+187	        """Start a new worker process"""
+188	        import subprocess
+189	        import uuid
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b607_start_process_with_partial_path.html
+   Location: src/queue/auto_scaling.py:200:22
+199	        try:
+200	            process = subprocess.Popen(
+201	                ["python", "-m", "src.queue.worker"],
+202	                env=env,
+203	                stdout=subprocess.PIPE,
+204	                stderr=subprocess.PIPE,
+205	            )
+206	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.5/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: src/queue/auto_scaling.py:200:22
+199	        try:
+200	            process = subprocess.Popen(
+201	                ["python", "-m", "src.queue.worker"],
+202	                env=env,
+203	                stdout=subprocess.PIPE,
+204	                stderr=subprocess.PIPE,
+205	            )
+206	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 18771
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 22
+		Medium: 7
+		High: 5
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 3
+		Medium: 5
+		High: 26
+Files skipped (0):

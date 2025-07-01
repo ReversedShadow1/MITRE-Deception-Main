@@ -362,7 +362,6 @@ class EnhancedRuleBasedExtractor:
 
         return patterns
 
-
     def extract_techniques(
         self,
         text: str,

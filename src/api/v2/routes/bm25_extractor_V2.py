@@ -393,7 +393,6 @@ class EnhancedBM25Extractor:
         except Exception as e:
             logger.error(f"Failed to cache BM25 model: {str(e)}")
 
-
     def extract_techniques(
         self, text: str, threshold: float = 0.1, top_k: int = 10, job_id: str = None
     ) -> List[Dict]:

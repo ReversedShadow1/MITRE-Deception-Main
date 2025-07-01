@@ -496,7 +496,6 @@ class OptimizedNERExtractor(OptimizedNeuralExtractor):
             logger.error(f"Error extracting entities: {e}")
             return {}
 
-
     def extract_techniques(
         self,
         text: str,
